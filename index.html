@@ -1,0 +1,233 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Telehealth Appointment System</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <style>
+        /* Custom Styles */
+        #logo {
+            font-size: 2.5em;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        #logo {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #454040; /* Sky blue color */
+            border-radius: 15px; /* Smooth edges */
+            font-family: 'Arial', sans-serif;
+            font-size: 30px;
+            font-weight: bold;
+            color: rgb(29, 83, 199);
+            text-decoration: none;
+        }
+        #logo a {
+            color: white;
+            text-decoration: none;
+        }
+        #logo a {
+            text-decoration: none;
+            color: #fefdfd;
+        }
+        #banner .content {
+            text-align: center;
+            padding: 3em 0;
+        }
+        #banner .content h2 {
+            font-size: 3em;
+            color: #f8f6f6;
+        }
+        #banner .content p {
+            font-size: 1.5em;
+            color: #eef4edfd;
+        }
+        .spotlight img {
+            object-fit: cover;
+            height: 100%;
+        }
+        .actions .button {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        footer .icons a {
+            color: #28a745;
+        }
+        .icon-major {
+            font-size: 3em;
+            color: #28a745;
+        }
+    </style>
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <script src="https://mediafiles.botpress.cloud/2578c5f3-e986-4ec4-a4de-d53fe4bd1a7b/webchat/config.js" defer></script>
+</head>
+<body class="is-preload landing">
+    <div id="page-wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <h1 id="logo"><a href="index.html">Telehealth</a></h1>
+            <nav id="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#schedule">Schedule Appointment</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Banner -->
+        <section id="banner" style="background-image: url('https://t3.ftcdn.net/jpg/02/06/42/90/360_F_206429067_kAglBmtNQndcB0fZK6KBJCpQkcL1O3ry.jpg'); background-size: cover;">
+            <div class="content">
+                <header>
+                    <h2>Your Health, Our Priority</h2>
+                    <p>Schedule your appointment easily and consult with our experts from the comfort of your home.</p>
+                </header>
+                <span class="image"><img src="images/Default_Design_a_logo_for_a_website_called_Telehealth_a_modern_3.jpg" alt="Doctor Online" /></span>
+            </div>
+            <a href="#one" class="goto-next scrolly">Next</a>
+        </section>
+
+        <!-- Appointment Scheduling -->
+        <section id="schedule" class="spotlight style1 bottom">
+            <span class="image fit main"><img src="https://d2jx2rerrg6sh3.cloudfront.net/images/Article_Images/ImageForArticle_22649_1654681486583551.jpg" alt="Appointment Schedule" /></span>
+            <div class="content">
+                <div class="container">
+                    <header>
+                        <h2>Schedule Your Appointment</h2>
+                        <p>Fill out the form below to book your telehealth appointment.</p>
+                    </header>
+                    <form id="appointment-form" method="post" action="#">
+                        <div class="row gtr-uniform gtr-50">
+                            <div class="col-6 col-12-xsmall">
+                                <input type="text" name="name" id="name" placeholder="Your Name" required />
+                            </div>
+                            <div class="col-6 col-12-xsmall">
+                                <input type="email" name="email" id="email" placeholder="Your Email" required />
+                            </div>
+                            <div class="col-6 col-12-xsmall">
+                                <input type="date" name="date" id="date" placeholder="Appointment Date" required />
+                            </div>
+                            <div class="col-6 col-12-xsmall">
+                                <input type="time" name="time" id="time" placeholder="Appointment Time" required />
+                            </div>
+                            <div class="col-12">
+                                <textarea name="location" id="location" placeholder="Your Location" rows="2"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <textarea name="message" id="message" placeholder="Additional Information" rows="4"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <ul class="actions special">
+                                    <li><input type="submit" value="Book Appointment" class="button primary" /></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <a href="#services" class="goto-next scrolly">Next</a>
+        </section>
+        
+        <script>
+        document.getElementById('appointment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var location = document.getElementById('location').value;
+            
+            // Use Google Maps Geocoding API to get latitude and longitude
+            fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=https://api.serpwow.com/search?api_key=BEA945F1B6C443E5B27A5DA9B5E0A7AA&q=pizza&engine=google&location=Little+Rock-Pine+Bluff%2CAR%2CArkansas%2CUnited+States&google_domain=google.com&gl=us&hl=en`)
+                .then(response => response.json())
+                .then(data => {
+                    var coords = data.results[0].geometry.location;
+                    console.log(`Latitude: ${coords.lat}, Longitude: ${coords.lng}`);
+                    // You can now use the latitude and longitude to find the nearest doctor or any other functionality
+                })
+                .catch(error => console.error('Error:', error));
+        });
+        </script>
+        
+
+        <!-- Services -->
+        <section id="services" class="spotlight style2 right">
+            <span class="image fit main"><img src="https://d2jx2rerrg6sh3.cloudfront.net/image-handler/picture/2021/10/shutterstock_1673968429.jpg" alt="Telehealth Services" /></span>
+            <div class="content">
+                <header>
+                    <h2>Our Services</h2>
+                    <p>We offer a range of telehealth services to cater to your needs.</p>
+                </header>
+                <p>From general consultations to specialist advice, our telehealth platform connects you with healthcare professionals in various fields.</p>
+                <ul class="actions">
+                    <li><a href="#" class="button">Learn More</a></li>
+                </ul>
+            </div>
+            <a href="#contact" class="goto-next scrolly">Next</a>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="spotlight style3 left">
+            <span class="image fit main bottom"><img src="https://www.chestercountyhospital.org/-/media/images/chestercounty/blog/2022/february/220208innovators.ashx?h=370&w=600&la=en" alt="Contact Us" /></span>
+            <div class="content">
+                <header>
+                    <h2>Contact Us</h2>
+                    <p>Have questions or need assistance? Get in touch with us.</p>
+                </header>
+                <form method="post" action="#">
+                    <div class="row gtr-uniform gtr-50">
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" name="name" id="name" placeholder="Your Name" required />
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="email" name="email" id="email" placeholder="Your Email" required />
+                        </div>
+                        <div class="col-12">
+                            <textarea name="message" id="message" placeholder="Your Message" rows="4"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <ul class="actions special">
+                                <li><input type="submit" value="Send Message" class="button primary" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <a href="#footer" class="goto-next scrolly">Next</a>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <ul class="icons">
+                <li><a href="https://x.com/GeraldShimo" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+                <li><a href="https://www.linkedin.com/in/gerald-shimo-949b3a239/" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+                <li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+                <li><a href="#" class="icon solid alt fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; Telehealth. All rights reserved.</li><li><a href="http://html5up.net">Service 24/7</a></li>
+            </ul>
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/jquery.dropotron.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+    
+</body>
+<script src="https://mediafiles.botpress.cloud/2578c5f3-e986-4ec4-a4de-d53fe4bd1a7b/webchat/config.js" defer></script>
+</html>
